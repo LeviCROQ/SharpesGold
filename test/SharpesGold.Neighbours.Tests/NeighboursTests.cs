@@ -89,6 +89,9 @@ public class NeighboursTests
     [Test]
     public void ObstructionsTest()
     {
+
+        // Initial test
+
         Assert.That(this.sharpesNeighbours.UnvisitedCount, Is.EqualTo(25));
 
         this.sharpesNeighbours.Obstructed(6);
@@ -99,5 +102,44 @@ public class NeighboursTests
         Assert.That(this.sharpesNeighbours.IsUnvisited(6), Is.EqualTo(false));
         Assert.That(this.sharpesNeighbours.IsUnvisited(11), Is.EqualTo(false));
         Assert.That(this.sharpesNeighbours.IsUnvisited(16), Is.EqualTo(true));
+
+        // ALl obstructed
+        for (int i = 0; i < 25; i++) 
+        {
+            this.sharpesNeighbours.Obstructed(i);
+        }
+
+        for (int j = 0; j < 25; j++)
+        {
+            Assert.That(this.sharpesNeighbours.IsUnvisited(j), Is.EqualTo(false));
+        }
+    }
+
+
+    [Test]
+    public void AllVisitedTest() 
+    {
+        Assert.That(this.sharpesNeighbours.UnvisitedCount, Is.EqualTo(25));
+
+        for (int i = 0; i < 25; i++) 
+        {
+            this.sharpesNeighbours.Visited(i);
+        }
+
+        for (int j = 0; j < 25; j++)
+        {
+            Assert.That(this.sharpesNeighbours.IsUnvisited(j), Is.EqualTo(false));
+        }
+    }
+
+    [Test]
+    public void AllUnvisitedTest() 
+    {
+        Assert.That(this.sharpesNeighbours.UnvisitedCount, Is.EqualTo(25));
+
+        for (int j = 0; j < 25; j++)
+        {
+            Assert.That(this.sharpesNeighbours.IsUnvisited(j), Is.EqualTo(true));
+        }
     }
 }
